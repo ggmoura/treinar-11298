@@ -2,8 +2,8 @@ package br.com.treinar.inter.modelo;
 
 public class Cliente {
 
-	Integer codigoCliente;
-	String nome;
-	Long cpf;
+	public Integer codigoCliente;
+	public String nome;
+	public Long cpf;
 
 }
