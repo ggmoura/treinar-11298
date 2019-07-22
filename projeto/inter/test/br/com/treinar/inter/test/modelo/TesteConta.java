@@ -15,12 +15,12 @@ public class TesteConta {
 
 	private static void testeSacar() {
 		c.sacar(50d);
-		System.out.println(c.saldo);
+		System.out.println(c.getSaldo());
 	}
 
 	private static void testeDepositar() {
 		c.depositar(100d);
-		System.out.println(c.saldo);
+		System.out.println(c.getSaldo());
 	}
 
 }

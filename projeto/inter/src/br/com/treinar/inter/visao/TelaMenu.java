@@ -43,10 +43,10 @@ public class TelaMenu {
 	}
 
 	private void imprimirDadosConta() {
-		System.out.println("Numero: " + conta.numeroConta);
-		System.out.println("Agência: " + conta.agencia);
-		System.out.println("Nome Cliente: " + conta.cliente.nome);
-		System.out.println("Saldo: " + conta.saldo);
+		System.out.println("Numero: " + conta.getNumeroConta());
+		System.out.println("Agência: " + conta.getAgencia());
+		System.out.println("Nome Cliente: " + conta.getCliente().getNome());
+		System.out.println("Saldo: " + conta.getSaldo());
 	}
 
 	private void depositar() {
@@ -64,13 +64,14 @@ public class TelaMenu {
 	private void criarConta() {
 		conta = new Conta();
 		System.out.print("Informe o numero da conta: ");
-		conta.numeroConta = teclado.nextInt();
+		conta.setNumeroConta(teclado.nextInt());
 		System.out.print("Informe a agência: ");
-		conta.agencia = teclado.nextInt();
+		conta.setAgencia(teclado.nextInt());
 		teclado.nextLine();
 		System.out.print("Informe o nome do Cliente: ");
-		conta.cliente = new Cliente();
-		conta.cliente.nome = teclado.nextLine();
+		Cliente cliente = new Cliente();
+		cliente.setNome(teclado.nextLine());
+		conta.setCliente(cliente);
 	}
 
 	private void imprimirMenu() {
