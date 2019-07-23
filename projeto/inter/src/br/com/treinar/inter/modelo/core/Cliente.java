@@ -1,4 +1,4 @@
-package br.com.treinar.inter.modelo;
+package br.com.treinar.inter.modelo.core;
 
 public class Cliente {
 

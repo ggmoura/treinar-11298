@@ -1,6 +1,6 @@
 package br.com.treinar.inter.test.modelo;
 
-import br.com.treinar.inter.modelo.Conta;
+import br.com.treinar.inter.modelo.core.Conta;
 
 public class TesteConta {
 

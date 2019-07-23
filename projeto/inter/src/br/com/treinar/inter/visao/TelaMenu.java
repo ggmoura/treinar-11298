@@ -2,8 +2,8 @@ package br.com.treinar.inter.visao;
 
 import java.util.Scanner;
 
-import br.com.treinar.inter.modelo.Cliente;
-import br.com.treinar.inter.modelo.Conta;
+import br.com.treinar.inter.modelo.core.Cliente;
+import br.com.treinar.inter.modelo.core.Conta;
 
 public class TelaMenu {
 
