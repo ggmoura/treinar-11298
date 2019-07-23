@@ -1,6 +1,6 @@
 package br.com.treinar.inter.modelo.core;
 
-public class Conta {
+public abstract class Conta {
 
 	private Integer numeroConta;
 	private Integer agencia;
@@ -49,8 +49,6 @@ public class Conta {
 		saldo += valor;
 	}
 
-	public void sacar(Double valor) {
-		saldo -= valor;
-	}
+	public abstract void sacar(Double valor);
 
 }

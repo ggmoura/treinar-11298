@@ -2,6 +2,9 @@ package br.com.treinar.inter.visao;
 
 import java.util.Scanner;
 
+import br.com.treinar.inter.modelo.ContaCorrente;
+import br.com.treinar.inter.modelo.ContaPoupanca;
+import br.com.treinar.inter.modelo.ContaSalario;
 import br.com.treinar.inter.modelo.core.Cliente;
 import br.com.treinar.inter.modelo.core.Conta;
 
@@ -9,17 +12,17 @@ public class TelaMenu {
 
 	Conta conta;
 	Scanner teclado;
-	
+
 	public TelaMenu() {
 		teclado = new Scanner(System.in);
 	}
-	
+
 	public void iniciarMenu() {
 		Integer opcao;
 		do {
-			imprimirMenu();
+			imprimirMenuPrincipal();
 			opcao = teclado.nextInt();
-			
+
 			switch (opcao) {
 			case 1:
 				criarConta();
@@ -33,9 +36,10 @@ public class TelaMenu {
 			case 4:
 				sacar();
 				break;
-
 			default:
-				System.out.println("Opção inválida");
+				if (opcao != 0) {
+					System.out.println("Opção inválida");
+				}
 				break;
 			}
 		} while (opcao != 0);
@@ -54,7 +58,7 @@ public class TelaMenu {
 		Double valorDepositado = teclado.nextDouble();
 		conta.depositar(valorDepositado);
 	}
-	
+
 	private void sacar() {
 		System.out.print("Informe o valor a ser sacado: ");
 		Double valorSacado = teclado.nextDouble();
@@ -62,7 +66,33 @@ public class TelaMenu {
 	}
 
 	private void criarConta() {
-		conta = new Conta();
+		Integer opcao;
+		imprimirMenuCriarConta();
+		conta = null;
+		opcao = teclado.nextInt();
+		switch (opcao) {
+		case 1:
+			conta = new ContaCorrente();
+			criarConta(conta);
+			criarConta((ContaCorrente) conta);
+			break;
+		case 2:
+			conta = new ContaPoupanca();
+			criarConta(conta);
+			criarConta((ContaPoupanca) conta);
+			break;
+		case 3:
+			conta = new ContaSalario();
+			criarConta(conta);
+			criarConta((ContaSalario) conta);
+			break;
+		default:
+			System.out.println("Tipo de conta inválida");
+			return;
+		}
+	}
+
+	private void criarConta(Conta conta) {
 		System.out.print("Informe o numero da conta: ");
 		conta.setNumeroConta(teclado.nextInt());
 		System.out.print("Informe a agência: ");
@@ -74,13 +104,26 @@ public class TelaMenu {
 		conta.setCliente(cliente);
 	}
 
-	private void imprimirMenu() {
-		System.out.println("Informe\n\t"
-				+ "1 - Criar Conta\n\t"
-				+ "2 - Imprimir dados da conta\n\t"
-				+ "3 - Depositar\n\t"
-				+ "4 - Sacar\n\t"
-				+ "0 - Sair");
+	private void criarConta(ContaPoupanca contaPoupaca) {
+		System.out.println("Terminar cadastro conta poupança");
+	}
+
+	private void criarConta(ContaCorrente contaCorrente) {
+		System.out.println("Terminar cadastro conta corrente");
+	}
+
+	private void criarConta(ContaSalario contaSalario) {
+		System.out.println("Terminar cadastro conta salario");
+	}
+
+	private void imprimirMenuCriarConta() {
+		System.out
+				.println("Informe\n\t" + "1 - Conta Corrente\n\t" + "2 - Conta Poupança\n\t" + "3 - Conta Salário\n\t");
+	}
+
+	private void imprimirMenuPrincipal() {
+		System.out.println("Informe\n\t" + "1 - Criar Conta\n\t" + "2 - Imprimir dados da conta\n\t"
+				+ "3 - Depositar\n\t" + "4 - Sacar\n\t" + "0 - Sair");
 	}
 
 }

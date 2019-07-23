@@ -1,5 +1,6 @@
 package br.com.treinar.inter.test.modelo;
 
+import br.com.treinar.inter.modelo.ContaCorrente;
 import br.com.treinar.inter.modelo.core.Conta;
 
 public class TesteConta {
@@ -8,7 +9,7 @@ public class TesteConta {
 	
 	
 	public static void main(String[] args) {
-		c = new Conta();
+		c = new ContaCorrente();
 		testeDepositar();
 		testeSacar();
 	}
