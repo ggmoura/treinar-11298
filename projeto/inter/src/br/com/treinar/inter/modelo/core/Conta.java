@@ -50,5 +50,9 @@ public abstract class Conta {
 	}
 
 	public abstract void sacar(Double valor);
+	
+	public Double consultarSaldo() {
+		return this.saldo;
+	}
 
 }

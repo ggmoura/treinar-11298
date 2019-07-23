@@ -36,6 +36,9 @@ public class TelaMenu {
 			case 4:
 				sacar();
 				break;
+			case 5:
+				consultaSaldo();
+				break;
 			default:
 				if (opcao != 0) {
 					System.out.println("Opção inválida");
@@ -44,6 +47,14 @@ public class TelaMenu {
 			}
 		} while (opcao != 0);
 		teclado.close();
+	}
+
+	private void consultaSaldo() {
+		if (conta != null) {
+			System.out.println("O saldo da conta : " + conta.consultarSaldo());
+		} else {
+			System.out.println("A conta não foi criada. Utilize a opção 1");
+		}
 	}
 
 	private void imprimirDadosConta() {
@@ -123,7 +134,7 @@ public class TelaMenu {
 
 	private void imprimirMenuPrincipal() {
 		System.out.println("Informe\n\t" + "1 - Criar Conta\n\t" + "2 - Imprimir dados da conta\n\t"
-				+ "3 - Depositar\n\t" + "4 - Sacar\n\t" + "0 - Sair");
+				+ "3 - Depositar\n\t" + "4 - Sacar\n\t" + "5 - Consultar Saldo\n\t"+ "0 - Sair");
 	}
 
 }
