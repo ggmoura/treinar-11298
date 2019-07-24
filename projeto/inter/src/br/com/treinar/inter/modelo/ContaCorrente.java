@@ -1,8 +1,9 @@
 package br.com.treinar.inter.modelo;
 
+import br.com.treinar.inter.modelo.contrato.IProdutoPagavel;
 import br.com.treinar.inter.modelo.core.Conta;
 
-public class ContaCorrente extends Conta {
+public class ContaCorrente extends Conta implements IProdutoPagavel {
 
 	private Double taxaManutencao;
 	private Double limiteCredito;
@@ -33,6 +34,11 @@ public class ContaCorrente extends Conta {
 	public Double consultarSaldo() {
 		Double saldo = super.consultarSaldo();
 		return saldo + limiteCredito;
+	}
+	
+	@Override
+	public void pagar() {
+		sacar(taxaManutencao);
 	}
 
 }

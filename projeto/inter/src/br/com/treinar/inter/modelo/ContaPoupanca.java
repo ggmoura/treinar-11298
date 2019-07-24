@@ -1,8 +1,9 @@
 package br.com.treinar.inter.modelo;
 
+import br.com.treinar.inter.modelo.contrato.IProdutoRentavel;
 import br.com.treinar.inter.modelo.core.Conta;
 
-public class ContaPoupanca extends Conta {
+public class ContaPoupanca extends Conta implements IProdutoRentavel {
 
 	private Integer diaCreditoRendimento;
 	private static Integer taxaRendimento;
@@ -32,4 +33,9 @@ public class ContaPoupanca extends Conta {
 		this.diaCreditoRendimento = diaCreditoRendimento;
 	}
 
+	@Override
+	public void render() {
+		Double rendimento = (taxaRendimento / 1000) * getSaldo();
+		depositar(rendimento);
+	}
 }
