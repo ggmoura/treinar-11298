@@ -33,11 +33,11 @@ public abstract class Conta {
 		this.cliente = cliente;
 	}
 
-	public Double getSaldo() {
+	protected Double getSaldo() {
 		return saldo;
 	}
 
-	public void setSaldo(Double saldo) {
+	protected void setSaldo(Double saldo) {
 		this.saldo = saldo;
 	}
 

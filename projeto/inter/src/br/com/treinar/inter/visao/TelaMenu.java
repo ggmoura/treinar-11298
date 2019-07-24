@@ -61,7 +61,7 @@ public class TelaMenu {
 		System.out.println("Numero: " + conta.getNumeroConta());
 		System.out.println("Agência: " + conta.getAgencia());
 		System.out.println("Nome Cliente: " + conta.getCliente().getNome());
-		System.out.println("Saldo: " + conta.getSaldo());
+		System.out.println("Saldo: " + conta.consultarSaldo());
 	}
 
 	private void depositar() {
@@ -116,15 +116,22 @@ public class TelaMenu {
 	}
 
 	private void criarConta(ContaPoupanca contaPoupaca) {
-		System.out.println("Terminar cadastro conta poupança");
+		System.out.print("Informe o valor da taxa de rendimento da poupança: ");
+		contaPoupaca.setTaxaRendimento(teclado.nextInt());
+		teclado.nextLine();
 	}
 
 	private void criarConta(ContaCorrente contaCorrente) {
-		System.out.println("Terminar cadastro conta corrente");
+		System.out.print("Informe o valor da taxa de manutenção: ");
+		contaCorrente.setTaxaManutencao(teclado.nextDouble());
+		System.out.print("Informe o valor do limite de crédito: ");
+		contaCorrente.setLimiteCredito(teclado.nextDouble());
 	}
 
 	private void criarConta(ContaSalario contaSalario) {
-		System.out.println("Terminar cadastro conta salario");
+		System.out.print("Informe o dia de depósito do salário: ");
+		contaSalario.setDiaDepositoSalario(teclado.nextInt());
+		teclado.hasNextLine();
 	}
 
 	private void imprimirMenuCriarConta() {
