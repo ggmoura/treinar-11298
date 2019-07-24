@@ -39,6 +39,9 @@ public class TelaMenu {
 			case 5:
 				consultaSaldo();
 				break;
+			case 6:
+				alterarTaxaRendimento();
+				break;
 			default:
 				if (opcao != 0) {
 					System.out.println("Opção inválida");
@@ -47,6 +50,13 @@ public class TelaMenu {
 			}
 		} while (opcao != 0);
 		teclado.close();
+	}
+
+	private void alterarTaxaRendimento() {
+		System.out.println("Taxa de rendimento atual: " + ContaPoupanca.getTaxaRendimento());
+		System.out.print("Informe o valor da taxa de rendimento: ");
+		ContaPoupanca.setTaxaRendimento(teclado.nextInt());
+		teclado.nextLine();
 	}
 
 	private void consultaSaldo() {
@@ -116,8 +126,8 @@ public class TelaMenu {
 	}
 
 	private void criarConta(ContaPoupanca contaPoupaca) {
-		System.out.print("Informe o valor da taxa de rendimento da poupança: ");
-		contaPoupaca.setTaxaRendimento(teclado.nextInt());
+		System.out.print("Informe o dia de aniversário da conta: ");
+		contaPoupaca.setDiaCreditoRendimento(teclado.nextInt());
 		teclado.nextLine();
 	}
 
@@ -135,13 +145,19 @@ public class TelaMenu {
 	}
 
 	private void imprimirMenuCriarConta() {
-		System.out
-				.println("Informe\n\t" + "1 - Conta Corrente\n\t" + "2 - Conta Poupança\n\t" + "3 - Conta Salário\n\t");
+		System.out.println("Informe\n\t" + "1 - Conta Corrente\n\t" + "2 - Conta Poupança\n\t" + "3 - Conta Salário\n\t");
 	}
 
 	private void imprimirMenuPrincipal() {
-		System.out.println("Informe\n\t" + "1 - Criar Conta\n\t" + "2 - Imprimir dados da conta\n\t"
-				+ "3 - Depositar\n\t" + "4 - Sacar\n\t" + "5 - Consultar Saldo\n\t"+ "0 - Sair");
+		
+		System.out.print("Informe\n\t"
+				+ "1 - Criar Conta\n\t"
+				+ "2 - Imprimir dados da conta\n\t"
+				+ "3 - Depositar\n\t"
+				+ "4 - Sacar\n\t"
+				+ "5 - Consultar Saldo\n\t"
+				+ "6 - Alterar Taxa De Rendimento\n\t"
+				+ "0 - Sair\n=> ");
 	}
 
 }

@@ -5,9 +5,10 @@ public class TesteStatic {
 	@SuppressWarnings("static-access")
 	public static void main(String[] args) {
 		
+		EstudoStatic o1 = new EstudoStatic();
+
 		EstudoStatic.atributoStatico = 10;
 
-		EstudoStatic o1 = new EstudoStatic();
 		o1.atributoDeInstancia = 1;
 		
 		EstudoStatic o2 = new EstudoStatic();
