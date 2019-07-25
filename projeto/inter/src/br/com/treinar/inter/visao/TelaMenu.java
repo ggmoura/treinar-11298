@@ -3,18 +3,24 @@ package br.com.treinar.inter.visao;
 import java.util.Scanner;
 
 import br.com.treinar.inter.modelo.ContaCorrente;
+import br.com.treinar.inter.modelo.ContaInvestimento;
 import br.com.treinar.inter.modelo.ContaPoupanca;
 import br.com.treinar.inter.modelo.ContaSalario;
 import br.com.treinar.inter.modelo.core.Cliente;
 import br.com.treinar.inter.modelo.core.Conta;
+import br.com.treinar.inter.service.InterService;
+import br.com.treinar.inter.util.InterRepositorio;
 
 public class TelaMenu {
 
-	Conta conta;
-	Scanner teclado;
+	private InterRepositorio repositorio;
+	private InterService service;
+	private Scanner teclado;
 
 	public TelaMenu() {
 		teclado = new Scanner(System.in);
+		repositorio = InterRepositorio.getInstace();
+		service = new InterService();
 	}
 
 	public void iniciarMenu() {
@@ -42,6 +48,12 @@ public class TelaMenu {
 			case 6:
 				alterarTaxaRendimento();
 				break;
+			case 7:
+				aplicarRendimento();
+				break;
+			case 8:
+				cobrarTaxaManutencao();
+				break;
 			default:
 				if (opcao != 0) {
 					System.out.println("Opção inválida");
@@ -52,6 +64,14 @@ public class TelaMenu {
 		teclado.close();
 	}
 
+	private void cobrarTaxaManutencao() {
+		service.cobrarTaxaManutencao();
+	}
+
+	private void aplicarRendimento() {
+		service.aplicarRendimento();
+	}
+
 	private void alterarTaxaRendimento() {
 		System.out.println("Taxa de rendimento atual: " + ContaPoupanca.getTaxaRendimento());
 		System.out.print("Informe o valor da taxa de rendimento: ");
@@ -60,6 +80,7 @@ public class TelaMenu {
 	}
 
 	private void consultaSaldo() {
+		Conta conta = recuperarConta();
 		if (conta != null) {
 			System.out.println("O saldo da conta : " + conta.consultarSaldo());
 		} else {
@@ -68,6 +89,7 @@ public class TelaMenu {
 	}
 
 	private void imprimirDadosConta() {
+		Conta conta = recuperarConta();
 		System.out.println("Numero: " + conta.getNumeroConta());
 		System.out.println("Agência: " + conta.getAgencia());
 		System.out.println("Nome Cliente: " + conta.getCliente().getNome());
@@ -75,12 +97,14 @@ public class TelaMenu {
 	}
 
 	private void depositar() {
+		Conta conta = recuperarConta();
 		System.out.print("Informe o valor a ser depositado: ");
 		Double valorDepositado = teclado.nextDouble();
 		conta.depositar(valorDepositado);
 	}
 
 	private void sacar() {
+		Conta conta = recuperarConta();
 		System.out.print("Informe o valor a ser sacado: ");
 		Double valorSacado = teclado.nextDouble();
 		conta.sacar(valorSacado);
@@ -89,7 +113,7 @@ public class TelaMenu {
 	private void criarConta() {
 		Integer opcao;
 		imprimirMenuCriarConta();
-		conta = null;
+		Conta conta = null;
 		opcao = teclado.nextInt();
 		switch (opcao) {
 		case 1:
@@ -107,10 +131,16 @@ public class TelaMenu {
 			criarConta(conta);
 			criarConta((ContaSalario) conta);
 			break;
+		case 4:
+			conta = new ContaInvestimento();
+			criarConta(conta);
+			criarConta((ContaInvestimento) conta);
+			break;
 		default:
 			System.out.println("Tipo de conta inválida");
 			return;
 		}
+		repositorio.adicionarConta(conta);
 	}
 
 	private void criarConta(Conta conta) {
@@ -130,6 +160,14 @@ public class TelaMenu {
 		contaPoupaca.setDiaCreditoRendimento(teclado.nextInt());
 		teclado.nextLine();
 	}
+	
+	private void criarConta(ContaInvestimento contaInvestimento) {
+		System.out.print("Informe o valor da taxa de rendimento: ");
+		contaInvestimento.setTaxaRendimento(teclado.nextInt());
+		System.out.print("Informe o valor da taxa de manutenção: ");
+		contaInvestimento.setTaxaManutencao(teclado.nextDouble());
+		teclado.nextLine();
+	}
 
 	private void criarConta(ContaCorrente contaCorrente) {
 		System.out.print("Informe o valor da taxa de manutenção: ");
@@ -143,9 +181,20 @@ public class TelaMenu {
 		contaSalario.setDiaDepositoSalario(teclado.nextInt());
 		teclado.hasNextLine();
 	}
+	
+	private Conta recuperarConta() {
+		System.out.print("Informe o indice da conta: ");
+		int indiceConta = teclado.nextInt();
+		teclado.nextLine();
+		return InterRepositorio.getInstace().recuperarConta(indiceConta);
+	}
 
 	private void imprimirMenuCriarConta() {
-		System.out.println("Informe\n\t" + "1 - Conta Corrente\n\t" + "2 - Conta Poupança\n\t" + "3 - Conta Salário\n\t");
+		System.out.println("Informe\n\t" 
+				+ "1 - Conta Corrente\n\t" 
+				+ "2 - Conta Poupança\n\t" 
+				+ "3 - Conta Salário\n\t"
+				+ "4 - Conta Investimento\n\t");
 	}
 
 	private void imprimirMenuPrincipal() {
@@ -157,6 +206,8 @@ public class TelaMenu {
 				+ "4 - Sacar\n\t"
 				+ "5 - Consultar Saldo\n\t"
 				+ "6 - Alterar Taxa De Rendimento\n\t"
+				+ "7 - Aplicar Rendimento\n\t"
+				+ "8 - Cobrar Taxa De Manutenção\n\t"
 				+ "0 - Sair\n=> ");
 	}
 
