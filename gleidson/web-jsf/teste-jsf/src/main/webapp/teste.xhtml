@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>JSF 2.0 Hello World</title>
+</h:head>
+<h:body>
+	<h:messages />
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputText value="Nome	: "></h:outputText>
+			<h:inputText requiredMessage="Campo nome obrigatório, blah"
+				label="Nome da Pessoa" required="true"
+				value="#{pessoaController.pessoa.nome}">
+				<f:validator validatorId="br.com.inter.NomeValidator" />
+			</h:inputText>
+			<h:outputText value="Data Nascimento: "></h:outputText>
+			<h:inputText label="Data Nascimento" required="true"
+				value="#{pessoaController.pessoa.dataNascimento}">
+				<f:convertDateTime pattern="dd/MM/YYYY" />
+			</h:inputText>
+			<h:outputText value="Tipo de Telefone: "></h:outputText>
+			<h:selectOneMenu label="Tipo de Telefone" value="#{pessoaController.pessoa.tipoTelefone}" required="true">
+				<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+				<f:selectItems value="#{cacheController.tiposTelefone}" var="tipo" itemLabel="#{tipo.descricao}" itemValue="#{tipo}" />
+			</h:selectOneMenu>
+			<h:commandButton action="#{pessoaController.alterarNome}"
+				value="Alterar Nome" />
+		</h:panelGrid>
+		<br />
+		<br />
+	</h:form>
+</h:body>
+</html>
